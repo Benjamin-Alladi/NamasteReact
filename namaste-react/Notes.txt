@@ -1,0 +1,18 @@
+created namaste-react
+created index.html, App.js
+
+npm init => Initialiase npm. It creates packagr.json
+npm install react
+npm install react-dom
+npm install -D parcel => Installing "parcel" as a DevDependency. It is a bundler similar to WebPack, Vite.
+
+In App.js, import React from "react" and import ReactDOM from "react-dom"
+Now create ReactElement which is a Javascript object.  React.createElement(HTMLTag, Object of Attributes, Array of Children).
+Now create root using ReactDOM.createRoot(document.getElementById("root")).
+root.render(ReactElement).
+
+Now load this script into index.html using "script" tag (type="module").
+
+To run the application in Development Mode => npx parcel index.html;  (Here, We are making index.html as entrypoint. So, remove main:"index.js" from package.json).
+To run the application in Production Mode => npx parcel build index.html;
+Production Mode if faster than Development Mode.
