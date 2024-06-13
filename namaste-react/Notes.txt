@@ -15,4 +15,4 @@ Now load this script into index.html using "script" tag (type="module").
 
 To run the application in Development Mode => npx parcel index.html;  (Here, We are making index.html as entrypoint. So, remove main:"index.js" from package.json).
 To run the application in Production Mode => npx parcel build index.html;
-Production Mode if faster than Development Mode.
+Production Mode is faster than Development Mode.
