@@ -1,11 +1,13 @@
 created namaste-react
 created index.html, App.js
 
+*
 npm init => Initialiase npm. It creates packagr.json
 npm install react
 npm install react-dom
 npm install -D parcel => Installing "parcel" as a DevDependency. It is a bundler similar to WebPack, Vite.
 
+*
 In App.js, import React from "react" and import ReactDOM from "react-dom"
 Now create ReactElement which is a Javascript object.  React.createElement(HTMLTag, Object of Attributes, Array of Children).
 Now create root using ReactDOM.createRoot(document.getElementById("root")).
@@ -24,3 +26,28 @@ Now Add this to "scripts" in package.json:
 
 Run the application in Development Mode => npm run start.
 Run the application in Production Mode => npm run build.
+
+
+
+*** JSX(JavaScript XML): 
+JSX is XML,HTML like markup language.
+JSX is a syntax extension for JavaScript that lets you write HTML-like markup inside a JavaScript file.
+
+<h1 className="heading" id="hd>This is a heading</h1? === React.createElement("h1", {className="heading", id:"hd"}, "This is a heading");
+JSX === ReactElement(JS object);
+
+BABEL is a javascript compiler and it compiles JSX into ReactElements(objects) so that JS-Engine can understand.
+
+
+
+***Components: 
+Small Piece/Part of UI which has its own logic and appearence.
+A component is a Javascript function that returns JSX.
+
+Rendering a Component: {ComponentName()} or <ComponentName/> or <ComponentName> </ComponentName>.
+
+If a component is nested inside another component, it is called "Component Composition".
+Ex:
+<Component1>
+    <Component2/>
+</Component1>
