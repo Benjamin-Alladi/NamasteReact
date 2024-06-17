@@ -1,0 +1,36 @@
+1. Triggering a Render:
+
+React triggers a render mainly in 2 ways:
+a) Rendering an index.js which gets executed when we run our application.
+b) When we change state/props of a component, React triggers a render (re-render that component).
+
+2. Rendering: 
+Updating UI (or) calling a component.
+It has 4 stages:
+i) Creating a new Virtual DOM
+ii) Reconciliation / React Fiber
+iii) Diffing Algorithm
+iv) Committing changes to Actual DOM.
+
+i) Creating a new Virtual DOM:
+Every time React triggers a render, it also creates a new Virtual DOM.
+
+ii) Reconciliation / React Fiber:
+It is an algorithm/process used by React to compare two Virtual DOMs.
+This process uses "Diffing Algorithm".
+
+iii) Diffing Algorithm:
+It is implemented during Reconciliation.
+
+Diffing Algo is used by React to effectively(in minimum no. of steps) identify the changes required to update the actual DOM.
+As every time React triggers a render a new Virtual DOM is created and React recursively traverses down the virtual DOM to find the changes:
+
+For React elements that exists in new Virtual DOM & doesn't exist in prev Virtual DOM, it identifies that the corresponding HTML elements has to created and appended to Actual DOM.
+
+For React elements that doesn't in new Virtual DOM but exists in prev Virtual DOM, React identifies that the corresponding HTML elements has to be removed from Actual DOM.
+
+For React elements that exist in both the Virtual DOMs & differ by content, React identifies that the corresponding HTML's content has to be updated.
+
+iv) Committing to Actual DOM: At this stage, React DOM updates the Actual DOM according to the changes identified during Reconciliation process. Now, actual DOM is in sync with Virtual DOM.
+
+And the browser recalculates the layout(reflow) and repaints the updated UI on the screen.

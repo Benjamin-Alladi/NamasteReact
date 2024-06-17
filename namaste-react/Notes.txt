@@ -2,7 +2,7 @@ created namaste-react
 created index.html, App.js
 
 *
-npm init => Initialiase npm. It creates packagr.json
+npm init => Initialiase npm. It creates package.json
 npm install react
 npm install react-dom
 npm install -D parcel => Installing "parcel" as a DevDependency. It is a bundler similar to WebPack, Vite.
