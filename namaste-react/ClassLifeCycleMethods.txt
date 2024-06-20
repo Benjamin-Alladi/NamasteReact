@@ -146,17 +146,24 @@ Unmounting Phase: componentWillUnmount().
 
 
 
-After Initial render: componentDidMount() is called. Make API calls and change the state using this.setState({}).  useEffect(()=>{}, []).
+After Initial render(after the component is inserted into the DOM): componentDidMount() is called. Make API calls and change the state using this.setState({}).  useEffect(()=>{}, []).
 
-After every render: componentDidUpdate() is called.  useEffect(()=>{}, [stateVariable]).
+After every render(only when component is updated, it is not called after the initial render.): componentDidUpdate() is called.  useEffect(()=>{}, [stateVariable]).
 
 After component is removed from DOM: componentWillUnmount() is called.  
 useEffect(()=>{
-  ()={
+  return ()={
     console.log("This is called when a component is Unmounted");
     removeEventListener(), clearTimeout(), clearInterval().
   }
-})
+});
+
+
+
+Empty Dependency Array: Runs once after the initial render. The effect runs only once after the initial render, similar to componentDidMount().
+No Dependency Array: Runs on every render. The effect runs after every render, similar to componentDidUpdate().
+Specific Dependencies: Runs only when any specified dependency changes.
+Cleanup Function: Runs before the effect re-runs and when the component unmounts. componentWillUnmount().
 
 
 
