@@ -1,10 +1,11 @@
-1. Triggering a Render:
+https://github.com/acdlite/react-fiber-architecture
 
+Triggering a Render:
 React triggers a render mainly in 2 ways:
 a) Rendering an index.js which gets executed when we run our application.
 b) When we change state/props of a component, React triggers a render (re-render that component).
 
-2. Rendering: 
+1. Rendering: 
 Updating UI (or) calling a component.
 It has 4 stages:
 i) Creating a new Virtual DOM
@@ -31,6 +32,6 @@ For React elements that doesn't in new Virtual DOM but exists in prev Virtual DO
 
 For React elements that exist in both the Virtual DOMs & differ by content, React identifies that the corresponding HTML's content has to be updated.
 
-iv) Committing to Actual DOM: At this stage, React DOM updates the Actual DOM according to the changes identified during Reconciliation process. Now, actual DOM is in sync with Virtual DOM.
+2. iv) Committing to Actual DOM: At this stage, React DOM updates the Actual DOM according to the changes identified during Reconciliation process. Now, actual DOM is in sync with Virtual DOM.
 
 And the browser recalculates the layout(reflow) and repaints the updated UI on the screen.

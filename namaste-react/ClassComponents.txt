@@ -1,0 +1,51 @@
+
+Class Component is a Javascript class that renders JSX.
+Class Component should extend React.Component for Lifecycle methods, State Management and Props Handling.
+
+class Parnet extends React.Component{
+    constructor(props)
+    {
+        console.log("Parent Constructor called");
+        super(props);
+
+        this.state= {
+            state_variable1:value1,
+            state_variable2:value2,
+            state_variable3:value3,
+            count:0,
+        }
+    }
+
+    componentDidMount()
+    {
+        console.log("Parent componentDidMount called");
+    }
+
+    handleClick(e)
+    {
+        this.setState({count: this.state.count+1});
+    }
+
+    //The render() method is required and will always be called, the others are optional and will be called if you define them.
+    render()
+    {
+        console.log("Parent render called");
+        return (
+            <h1> Hello, {this.props.name}, coint is {this.state.count}</h1>
+
+            <button onClick={handleClick}> Increment </button>
+        )
+    }
+}
+
+A class is said to be "Mounted" when it is loaded or instantiated or rendered.
+Mounting means putting elements into the DOM. <Parent name="John"/>
+
+
+When a class is instantiated then its constructor is called first(it will recieve props). And then render() method is called automatically.
+
+what if a constructor doesn't call super(props)?
+super(props) ensures that this.props is properly initialized.
+If your class component's constructor receives props but does not call super(props), you will encounter issues when trying to access this.props within your component. This is because super(props) is required to correctly initialize the "this" context in a React component that extends React.Component.
+Uncaught ReferenceError: Must call super constructor in derived class before accessing 'this' or returning from derived constructor
+
