@@ -2,8 +2,8 @@ https://github.com/acdlite/react-fiber-architecture
 
 Triggering a Render:
 React triggers a render mainly in 2 ways:
-a) Rendering an index.js which gets executed when we run our application.
-b) When we change state/props of a component, React triggers a render (re-render that component).
+a) Rendering on root in index.js which gets executed when we run our application.
+b) When state/props of a component, value returned by useMemo hook(memoized result) is changed, React triggers a re-render (calls that component again with updated state/props/memoized result).
 
 1. Rendering: 
 Updating UI (or) calling a component.

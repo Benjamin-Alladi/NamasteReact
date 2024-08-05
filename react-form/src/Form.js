@@ -5,7 +5,7 @@ function Form()
 {
     let [text, setText]= useState("");
     let [status, setStatus]= useState("empty");
-
+    
     function handleInput(e)
     {
         setText(e.target.value);

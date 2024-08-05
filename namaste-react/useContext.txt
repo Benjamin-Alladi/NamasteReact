@@ -1,0 +1,193 @@
+useContext API: It is used for efficiently managing the state. It solves prop-drilling.  
+https://www.w3schools.com/react/react_usecontext.asp
+
+1. const MyContext= createContext({name:"John", company:"default"}).
+
+    You create a context using React.createContext(). It can be accessed by any component in react application.
+
+    It returns an object with two components: a Provider and a Consumer.
+
+    The default value passed to createContext can be of any JavaScript type, not just an object ({}). 
+
+2. <MyContext.Provider value={{name:"John, company:"Google}}> <NavBar/> <Footer/> <MyContext.provider/> :
+
+  value="Hello" or value={42} or value={[state, setState]} or value={{state,setState}}
+
+  It is a component that allows its children to access the value of the Context. It takes "value" as props.
+  If you are wrapping your components with Context.Provider component, then you must provide "value".
+
+  While you can initialize the context with a default value using createContext(), you still need to pass the value prop to the Provider component. This is because the        Provider's value prop is what actually provides the context value to its children/descendants. The default value is only used when there is no Provider wrapping the consumer component. 
+
+  Default value is used only when a component consumes the context outside of a Provider or when the Provider does not provide a value prop.
+ 
+   Provider does not throw an error if the value prop is not provided. Instead, the context consumers will use the default value specified when the context was created with createContext. This default behavior can lead to unintended consequences if the consumers expect a specific value to be provided.
+
+3. const obj= useContext(Mycontext)
+            (or)
+   const msg=useContext(MyContext) or const num=useContext(MyContext) or const [state, setState]=useContext(MyContext) or  const {name, company}= useContext(Mycontext);
+
+   It is used to access the context value of the specified Context.
+
+   ***It is a common pattern in react to use Objects as Context-Value.
+
+*** https://chatgpt.com/c/fa99b3ba-9b64-4a2f-a3d1-8fab1625e9b0
+
+
+
+
+Use context provider to pass state to lower level child
+
+To pass state to a lower-level child component using Context in React, you can follow these steps:
+
+Create a Context: First, create a new context using React.createContext().
+Create a Provider Component: Create a component that will use the context's Provider to pass the state and any functions needed to manipulate that state down to its children.
+Wrap Your Application with the Provider: Use the Provider component to wrap the part of your application where you need to access the context.
+Consume the Context in Lower-Level Components: Use the useContext hook in functional components or Context.Consumer in class components to access the context's value.
+Here's an example to illustrate this:
+
+Step-by-Step Example:
+
+1. Create a Context:
+Create a new context in a separate file, for example MyContext.js:
+
+import React from 'react';
+
+const MyContext = React.createContext();
+
+export default MyContext;
+
+2. Create a Provider Component:
+Create a provider component that will manage the state and provide it to its children. For example, MyProvider.js:
+
+import React, { useState } from 'react';
+import MyContext from './MyContext';
+
+const MyProvider = ({ children }) => {
+  const [state, setState] = useState({ value: 'initial value' });
+
+  const updateValue = (newValue) => {
+    setState({ value: newValue });
+  };
+
+  return (
+    <MyContext.Provider value={{ state, updateValue }}>
+      {children}
+    </MyContext.Provider>
+  );
+};
+
+export default MyProvider;
+
+3. Wrap Your Application with the Provider
+Wrap your application or the part of your application that needs access to the context with the provider component. For example, in App.js:
+
+import React from 'react';
+import MyProvider from './MyProvider';
+import MyComponent from './MyComponent';
+
+const App = () => {
+  return (
+    <MyProvider>
+      <MyComponent />
+    </MyProvider>
+  );
+};
+
+export default App;
+
+4. Consume the Context in Lower-Level Components
+Use the useContext hook to access the context in lower-level components. For example, in MyComponent.js:
+
+import React, { useContext } from 'react';
+import MyContext from './MyContext';
+
+const MyComponent = () => {
+  const { state, updateValue } = useContext(MyContext);
+
+  return (
+    <div>
+      <p>Value: {state.value}</p>
+      <button onClick={() => updateValue('new value')}>Update Value</button>
+    </div>
+  );
+};
+
+export default MyComponent;
+
+
+
+Example: Theme Context with Light and Dark Modes
+
+1. Create a Context for Theme:
+import React, { useState, useContext } from 'react';
+
+// Create a Theme Context
+const ThemeContext = React.createContext();
+
+function ThemeProvider({ children }) {
+
+  // Manage the theme state in the provider
+  const [theme, setTheme] = useState('light');
+
+  // Toggle function to switch themes
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+export { ThemeProvider, ThemeContext};
+
+2. Create a Themed Button Component:
+
+import React, {useContext} from 'react';
+import {ThemeContext} from "./path.js";
+
+
+function ThemedButton() {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
+  return (
+    <button
+      onClick={toggleTheme}
+      style={{
+        background: theme === 'dark' ? '#333' : '#fff',
+        color: theme === 'dark' ? '#fff' : '#000',
+        padding: '10px 20px',
+        border: 'none',
+        cursor: 'pointer',
+      }}
+    >
+      Toggle Theme
+    </button>
+  );
+}
+
+export default ThemedButton;
+
+
+3. Use the ThemeProvider and ThemedButton in the App:
+
+import React from 'react';
+import { ThemeProvider } from './ThemeProvider';
+import ThemedButton from './ThemedButton';
+
+function App() {
+  return (
+    <ThemeProvider>
+      <div style={{ padding: '20px' }}>
+        <h1>Theme Switcher Example</h1>
+        <ThemedButton />
+      </div>
+    </ThemeProvider>
+  );
+}
+
+export default App;
+
+

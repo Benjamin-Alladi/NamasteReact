@@ -74,3 +74,58 @@ Error Handling
 HTTPs
 Tree Shaking - remove unused code
 Different dev and prod bundles
+
+*** Routing, useContext, Redux, lazy loading, suspense.
+
+
+
+*** Higher-order components (HOCs): These are PURE FUNCTIONS (For same input, same output and they do not modify the input).
+These are a powerful feature of the React library. They allow you to reuse component logic across multiple components.
+
+In React, a higher-order component is a function that takes a component as an argument and returns a new component that wraps the original component.
+
+HOCs allow you to add additional functionality to a component without modifying the component's code. For example, you can use a HOC to add authentication or routing capabilities to a component or to apply a specific style or behavior to multiple components.
+
+HOCs can take additional arguments, which lets you customize the behavior of the HOC. This makes them a flexible and reusable way to add functionality to your components.
+
+Benefits of Using Higher-Order Components in React
+1. Reusability: HOCs allow you to reuse component logic across multiple components, which can save time and reduce code duplication.
+2. Flexibility: HOCs can take additional arguments, which allows you to customize the behavior of the HOC. This makes them a flexible way to add functionality to your components.
+3. Separation of concerns: HOCs can help separate concerns in your code by encapsulating certain functionality in a separate component. This can make the code easier to read and maintain.
+4. Composition: HOCs can be composed together to create more complex functionality. This allows you to build up functionality from smaller, reusable pieces.
+Higher-order components can be used to implement cross-cutting concerns in your application such as authentication, error handling, logging, performance tracking, and many other features.
+
+export function LabelledCard({RestaurantCard})
+{
+    const function PromotedRestaurantCard(props)
+    {
+        return (
+            <div>
+                <label>Promoted</label>
+                <RestaurantCard {...props}/>
+            </div>
+        );
+    }
+    return LabelledCard;
+}
+
+const PromotedCard=LabelledCard(RestaurantCard);
+
+PromotedRestaurantCard is a HOC and a Pure Function.
+It takes a component(RestaurantCard) as an argument and returns a new component(LabelledCard) that wraps the original component.
+
+export function getLabelledCard(Card)
+{
+    return (props)=>{
+        return(
+            
+            <div>
+                <label htmlFor="">Promoted</label>
+                <Card {...props}/>
+            </div>
+
+        );
+    }
+}
+
+const PromotedCard= getLabelledCard(Card);
